@@ -30,3 +30,8 @@ sudo apt install --yes \
 # Download the server and extract
 curl -fO "https://downloads.apache.org/guacamole/${GUAC_VERSION}/source/guacamole-server-${GUAC_VERSION}.tar.gz"
 tar -xzf "guacamole-server-${GUAC_VERSION}.tar.gz"
+
+# Configure build
+cd "guacamole-server-${GUAC_VERSION}"
+./configure --with-init-dir=/etc/init.d
+cd ${OLDPWD}
