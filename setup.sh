@@ -35,7 +35,9 @@ tar -xzf "guacamole-server-${GUAC_VERSION}.tar.gz"
 # Configure build
 cd "guacamole-server-${GUAC_VERSION}"
 ./configure --with-init-dir=/etc/init.d
-cd ${OLDPWD}
 
-# Build
+# Build and install
 make
+sudo make install
+
+cd ${OLDPWD}
