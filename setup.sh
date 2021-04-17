@@ -23,6 +23,7 @@ sudo apt install --yes \
     libtelnet-dev \
     libvncserver-dev \
     libwebsockets-dev \
+    libpulse-dev \
     libssl-dev \
     libvorbis-dev \
     libwebp-dev
