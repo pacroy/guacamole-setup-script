@@ -2,6 +2,9 @@
 set -o errexit
 set -o pipefail
 
+# Variables
+GUAC_VERSION="1.3.0"
+
 # Update & upgrade system
 sudo apt-get update && sudo apt-get --yes upgrade
 
@@ -23,3 +26,7 @@ sudo apt install --yes \
     libssl-dev \
     libvorbis-dev \
     libwebp-dev
+
+# Download the server and extract
+curl -fO "https://downloads.apache.org/guacamole/${GUAC_VERSION}/source/guacamole-server-${GUAC_VERSION}.tar.gz"
+tar -xzf "guacamole-server-${GUAC_VERSION}.tar.gz"
