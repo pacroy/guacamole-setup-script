@@ -39,5 +39,6 @@ cd "guacamole-server-${GUAC_VERSION}"
 # Build and install
 make
 sudo make install
+sudo ldconfig
 
 cd ${OLDPWD}
