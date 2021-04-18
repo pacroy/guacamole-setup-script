@@ -60,6 +60,9 @@ sudo apt install --yes nginx-core
 sudo snap install core; sudo snap refresh core
 sudo snap install --classic certbot
 
+# Clean up
+rm -rf snap
+
 # Download the server and extract
 curl -fO "https://downloads.apache.org/guacamole/${GUAC_VERSION}/source/guacamole-server-${GUAC_VERSION}.tar.gz"
 tar -xzf "guacamole-server-${GUAC_VERSION}.tar.gz"
