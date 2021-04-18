@@ -148,21 +148,28 @@ sudo systemctl restart tomcat
 sudo certbot --nginx -d "${DOMAIN_NAME}" -m "${EMAIL}" --agree-tos -n
 
 # Configure nginx
-echo "server {
-    listen       80;
-    listen  [::]:80;
-    server_name ${DOMAIN_NAME};
+search_for='#\t\ttry_files $uri $uri\/ =404;'
+replace_with='#'
+sudo sed -i "s/${search_for}/${replace_with}/g" /etc/nginx/sites-enabled/default
 
-    location / {
-        proxy_pass http://localhost:8080/;
-        proxy_buffering off;
-        proxy_http_version 1.1;
-        proxy_set_header X-Forwarded-For "'$proxy_add_x_forwarded_for'";
-        proxy_set_header Upgrade "'$http_upgrade'";
-        proxy_set_header Connection "'$http_connection'";
-        proxy_cookie_path /guacamole/ /;
-        access_log off;
-    }
-}" | sudo tee /etc/nginx/conf.d/default.conf > /dev/null
+search_for='# First attempt to serve request as file, then'
+replace_with=''
+sudo sed -i "s/${search_for}/${replace_with}/g" /etc/nginx/sites-enabled/default
+
+search_for='# as directory, then fall back to displaying a 404.'
+replace_with=''
+sudo sed -i "s/${search_for}/${replace_with}/g" /etc/nginx/sites-enabled/default
+
+search_for='try_files $uri $uri\/ =404;'
+replace_with='proxy_pass http:\/\/localhost:8080\/;\
+                proxy_buffering off;\
+                proxy_http_version 1.1;\
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\
+                proxy_set_header Upgrade $http_upgrade;\
+                proxy_set_header Connection $http_connection;\
+                proxy_cookie_path \/guacamole\/ \/;\
+                access_log off;'
+sudo sed -i "s/${search_for}/${replace_with}/g" /etc/nginx/sites-enabled/default
+
 sudo nginx -t
 sudo systemctl restart nginx
