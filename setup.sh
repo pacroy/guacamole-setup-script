@@ -53,6 +53,7 @@ cd ${OLDPWD}
 sudo apt-get install --yes default-jdk
 sudo groupadd tomcat
 sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
+sudo adduser $USER tomcat
 curl -LO "https://downloads.apache.org/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz"
 sudo mkdir /opt/tomcat
 sudo tar xzvf "apache-tomcat-${TOMCAT_VERSION}.tar.gz" -C /opt/tomcat --strip-components=1
