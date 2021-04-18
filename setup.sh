@@ -93,6 +93,7 @@ WantedBy=multi-user.target" | sudo tee /etc/systemd/system/tomcat.service > /dev
 sudo systemctl daemon-reload
 sudo systemctl start tomcat
 systemctl status tomcat.service
+sudo systemctl enable tomcat
 
 # Clean up
 cd ${OLDPWD}
