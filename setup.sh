@@ -14,6 +14,9 @@ set -o pipefail
 # Variables
 GUAC_VERSION="1.3.0"
 TOMCAT_VERSION="8.5.65"
+DOMAIN_NAME="${1}"
+
+if [ -z ${DOMAIN_NAME} ]; then >&2 echo "DOMAIN_NAME is required as the 1st argument" && exit 90; fi
 
 # Update & upgrade system
 sudo apt-get update && sudo apt-get --yes upgrade
@@ -132,3 +135,23 @@ curl -LO "https://apache.org/dyn/closer.cgi?action=download&filename=guacamole/$
 sudo mv "guacamole-${GUAC_VERSION}.war" "/opt/tomcat/webapps/ROOT.war"
 sudo chown tomcat:tomcat "/opt/tomcat/webapps/ROOT.war"
 sudo systemctl restart tomcat
+
+# Configure nginx
+echo "server {
+    listen       80;
+    listen  [::]:80;
+    server_name ${DOMAIN_NAME};
+
+    location / {
+        proxy_pass http://localhost:8080/;
+        proxy_buffering off;
+        proxy_http_version 1.1;
+        proxy_set_header X-Forwarded-For "'$proxy_add_x_forwarded_for'";
+        proxy_set_header Upgrade "'$http_upgrade'";
+        proxy_set_header Connection "'$http_connection'";
+        proxy_cookie_path /guacamole/ /;
+        access_log off;
+    }
+}" | sudo tee /etc/nginx/conf.d/default.conf > /dev/null
+sudo nginx -t
+sudo systemctl restart nginx
