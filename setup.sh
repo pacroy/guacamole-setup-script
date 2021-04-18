@@ -47,6 +47,13 @@ sudo apt install --yes --no-install-recommends \
     fonts-dejavu                  \
     xfonts-terminus
 
+# Install nginx
+sudo apt install --yes nginx-core
+
+# Install certbot
+sudo snap install core; sudo snap refresh core
+sudo snap install --classic certbot
+
 # Download the server and extract
 curl -fO "https://downloads.apache.org/guacamole/${GUAC_VERSION}/source/guacamole-server-${GUAC_VERSION}.tar.gz"
 tar -xzf "guacamole-server-${GUAC_VERSION}.tar.gz"
