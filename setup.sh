@@ -181,5 +181,4 @@ echo "<user-mapping>
     <authorize username="guacadmin" password="guacadmin">
     </authorize>
 </user-mapping>" | sudo tee /etc/guacamole/user-mapping.xml
-sudo chmod 664 /etc/guacamole/user-mapping.xml
 sudo systemctl restart tomcat
