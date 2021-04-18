@@ -8,6 +8,7 @@
 # - https://github.com/apache/guacamole-server/blob/master/Dockerfile
 # - https://www.digitalocean.com/community/tutorials/how-to-install-apache-tomcat-8-on-ubuntu-16-04
 # - https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx
+# - https://guacamole.apache.org/doc/gug/proxying-guacamole.html
 set -o errexit
 set -o pipefail
 
