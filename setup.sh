@@ -140,7 +140,7 @@ sudo chown tomcat:tomcat "/opt/tomcat/webapps/ROOT.war"
 sudo systemctl restart tomcat
 
 # Configure certbot
-sudo certbot --nginx -d "${DOMAIN_NAME}" -m "${EMAIL}" --agree-tos
+sudo certbot --nginx -d "${DOMAIN_NAME}" -m "${EMAIL}" --agree-tos -n
 
 # Configure nginx
 echo "server {
