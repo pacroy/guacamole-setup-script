@@ -79,6 +79,7 @@ sudo ldconfig
 # Start service
 sudo systemctl start guacd
 systemctl status guacd
+sudo systemctl enable guacd
 
 # Clean up
 cd ${OLDPWD}
