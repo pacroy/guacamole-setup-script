@@ -41,4 +41,8 @@ make
 sudo make install
 sudo ldconfig
 
+# Start service
+sudo systemctl start guacd
+systemctl status guacd
+
 cd ${OLDPWD}
