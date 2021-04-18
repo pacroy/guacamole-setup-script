@@ -14,9 +14,12 @@ set -o pipefail
 # Variables
 GUAC_VERSION="1.3.0"
 TOMCAT_VERSION="8.5.65"
-DOMAIN_NAME="${1}"
+DOMAIN_NAME="${DOMAIN_NAME:-${1}}"
+EMAIL="${EMAIL:-${2}}"
 
-if [ -z ${DOMAIN_NAME} ]; then >&2 echo "DOMAIN_NAME is required as the 1st argument" && exit 90; fi
+if [ -z ${DOMAIN_NAME} ]; then >&2 echo "DOMAIN_NAME is required as an environment variable or as the 1st argument" && error=true; fi
+if [ -z ${EMAIL} ]; then >&2 echo "EMAIL is required as an environment variable or as the 1st argument" && error=true; fi
+if [ "$error" == "true" ]; then exit 90; fi
 
 # Update & upgrade system
 sudo apt-get update && sudo apt-get --yes upgrade
@@ -135,6 +138,9 @@ curl -LO "https://apache.org/dyn/closer.cgi?action=download&filename=guacamole/$
 sudo mv "guacamole-${GUAC_VERSION}.war" "/opt/tomcat/webapps/ROOT.war"
 sudo chown tomcat:tomcat "/opt/tomcat/webapps/ROOT.war"
 sudo systemctl restart tomcat
+
+# Configure certbot
+sudo certbot --nginx -d "${DOMAIN_NAME}" -m "${EMAIL}" --agree-tos
 
 # Configure nginx
 echo "server {
