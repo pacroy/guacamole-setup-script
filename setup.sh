@@ -4,6 +4,7 @@ set -o pipefail
 
 # Variables
 GUAC_VERSION="1.3.0"
+TOMCAT_VERSION="8.5.65"
 
 # Update & upgrade system
 sudo apt-get update && sudo apt-get --yes upgrade
@@ -45,4 +46,21 @@ sudo ldconfig
 sudo systemctl start guacd
 systemctl status guacd
 
+# Clean up
+cd ${OLDPWD}
+
+# Install Tomcat
+sudo apt-get install --yes default-jdk
+sudo groupadd tomcat
+sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
+curl -LO "https://downloads.apache.org/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz"
+sudo mkdir /opt/tomcat
+sudo tar xzvf "apache-tomcat-${TOMCAT_VERSION}.tar.gz" -C /opt/tomcat --strip-components=1
+sudo chgrp -R tomcat /opt/tomcat
+cd /opt/tomcat
+sudo chmod -R g+r conf
+sudo chmod g+x conf
+sudo chown -R tomcat webapps/ work/ temp/ logs/
+
+# Clean up
 cd ${OLDPWD}
