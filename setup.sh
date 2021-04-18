@@ -56,6 +56,8 @@ systemctl status guacd
 
 # Clean up
 cd ${OLDPWD}
+rm -rf "guacamole-server-${GUAC_VERSION}"
+rm -f "guacamole-server-${GUAC_VERSION}.tar.gz"
 
 # Install Tomcat
 TOMCAT_MAJOR_VERSION=$(echo ${TOMCAT_VERSION} | awk -F . '{print $1}')
@@ -106,3 +108,4 @@ sudo systemctl enable tomcat
 
 # Clean up
 cd ${OLDPWD}
+rm -f "apache-tomcat-${TOMCAT_VERSION}.tar.gz"
