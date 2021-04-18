@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+# Guacamole Setup Script
+# Description: Setup script to install and configure Apache Guacamole on Ubuntu Server 18.04. To be executed by a non-root, sudoer user.
+# Author: Chairat Onyaem (Par)
+# Source: https://github.com/pacroy/guacamole-setup-script
+# References:
+# - https://guacamole.apache.org/doc/gug/installing-guacamole.html
+# - https://github.com/apache/guacamole-server/blob/master/Dockerfile
+# - https://www.digitalocean.com/community/tutorials/how-to-install-apache-tomcat-8-on-ubuntu-16-04
 set -o errexit
 set -o pipefail
 
