@@ -7,6 +7,7 @@
 # - https://guacamole.apache.org/doc/gug/installing-guacamole.html
 # - https://github.com/apache/guacamole-server/blob/master/Dockerfile
 # - https://www.digitalocean.com/community/tutorials/how-to-install-apache-tomcat-8-on-ubuntu-16-04
+# - https://certbot.eff.org/lets-encrypt/ubuntubionic-nginx
 set -o errexit
 set -o pipefail
 
@@ -36,6 +37,15 @@ sudo apt install --yes \
     libssl-dev \
     libvorbis-dev \
     libwebp-dev
+
+# Install runtime dependencies
+sudo apt install --yes --no-install-recommends \	
+    netcat-openbsd                \
+    ca-certificates               \
+    ghostscript                   \
+    fonts-liberation              \
+    fonts-dejavu                  \
+    xfonts-terminus
 
 # Download the server and extract
 curl -fO "https://downloads.apache.org/guacamole/${GUAC_VERSION}/source/guacamole-server-${GUAC_VERSION}.tar.gz"
