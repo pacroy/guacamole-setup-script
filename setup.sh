@@ -177,8 +177,21 @@ sudo systemctl restart nginx
 
 # Configure default user
 sudo mkdir /etc/guacamole
-echo "<user-mapping>
+echo '<user-mapping>
     <authorize username="guacadmin" password="guacadmin">
+        <connection name="this-server-ssh">
+             <protocol>ssh</protocol>
+             <param name="hostname">localhost</param>
+             <param name="port">22</param>
+        </connection>
+        <connection name="some-win10-rdp">
+             <protocol>rdp</protocol>
+             <param name="hostname">some-win10-rdp</param>
+             <param name="port">3389</param>
+             <param name="username">username</param>
+             <param name="password">thisisyourpassword</param>
+             <param name="ignore-cert">true</param>
+        </connection>
     </authorize>
-</user-mapping>" | sudo tee /etc/guacamole/user-mapping.xml
+</user-mapping>' | sudo tee /etc/guacamole/user-mapping.xml
 sudo systemctl restart tomcat
