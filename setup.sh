@@ -7,8 +7,8 @@ set -o errexit
 set -o pipefail
 
 # Variables
-export GUAC_VERSION="1.3.0"
-export TOMCAT_VERSION="8.5.65"
+export GUAC_VERSION="${GUAC_VERSION:-1.3.0}"
+export TOMCAT_VERSION="${TOMCAT_VERSION:-8.5.65}"
 export DOMAIN_NAME="${DOMAIN_NAME:-${1}}"
 export EMAIL="${EMAIL:-${2}}"
 

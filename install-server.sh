@@ -10,7 +10,7 @@ set -o errexit
 set -o pipefail
 
 # Variables
-GUAC_VERSION="1.3.0"
+GUAC_VERSION="${GUAC_VERSION:-1.3.0}"
 
 # Update & upgrade system
 sudo apt-get update && sudo apt-get --yes upgrade

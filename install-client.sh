@@ -11,10 +11,14 @@ set -o errexit
 set -o pipefail
 
 # Variables
-GUAC_VERSION="1.3.0"
-TOMCAT_VERSION="8.5.65"
+GUAC_VERSION="${GUAC_VERSION:-1.3.0}"
+TOMCAT_VERSION="${TOMCAT_VERSION:-8.5.65}"
 DOMAIN_NAME="${DOMAIN_NAME:-${1}}"
 EMAIL="${EMAIL:-${2}}"
+
+if [ -z ${DOMAIN_NAME} ]; then >&2 echo "DOMAIN_NAME is required as an environment variable or as the 1st argument" && error=true; fi
+if [ -z ${EMAIL} ]; then >&2 echo "EMAIL is required as an environment variable or as the 2nd argument" && error=true; fi
+if [ "$error" == "true" ]; then exit 90; fi
 
 # Update & upgrade system
 sudo apt-get update && sudo apt-get --yes upgrade
