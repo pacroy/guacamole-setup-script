@@ -6,6 +6,7 @@
 # References:
 # - https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04
 # - https://guacamole.apache.org/doc/gug/jdbc-auth.html
+# - https://vitux.com/7-methods-to-generate-a-strong-password-in-ubuntu/
 set -o errexit
 set -o pipefail
 
