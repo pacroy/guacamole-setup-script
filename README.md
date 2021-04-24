@@ -1,5 +1,7 @@
 # Guacamole Setup Scripts
 
+[![Lint Code Base](https://github.com/pacroy/guacamole-setup-script/actions/workflows/linter.yml/badge.svg)](https://github.com/pacroy/guacamole-setup-script/actions/workflows/linter.yml)
+
 Shell scripts for install Apache Guacamole on Ubuntu Server 18.04
 
 ## Prerequisites
