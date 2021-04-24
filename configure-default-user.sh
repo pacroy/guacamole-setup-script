@@ -9,7 +9,7 @@ set -o errexit
 set -o pipefail
 
 # Configure default user
-sudo mkdir /etc/guacamole
+sudo mkdir -p /etc/guacamole
 echo '<user-mapping>
     <authorize username="guacadmin" password="guacadmin">
         <connection name="this-server-ssh">
