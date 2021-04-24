@@ -25,14 +25,14 @@ sudo mysql --execute='select version()'
 # Configure MySQL
 # sudo mysql_secure_installation
 
-# Download and extract JDBC extensions
+# Download and install JDBC extensions
 curl -fLO https://downloads.apache.org/guacamole/${GUAC_VERSION}/binary/guacamole-auth-jdbc-${GUAC_VERSION}.tar.gz
 tar -xzf "guacamole-auth-jdbc-${GUAC_VERSION}.tar.gz"
 
 sudo mkdir -p /etc/guacamole/extensions
 sudo cp "guacamole-auth-jdbc-${GUAC_VERSION}/mysql/guacamole-auth-jdbc-mysql-${GUAC_VERSION}.jar" "/etc/guacamole/extensions/"
 
-# Download and extract MySQL Connector/J
+# Download and install MySQL Connector/J
 curl -fLO "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${CONNECTORJ_VERSION}.tar.gz"
 tar -xvf "mysql-connector-java-${CONNECTORJ_VERSION}.tar.gz"
 
