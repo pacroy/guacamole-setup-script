@@ -45,7 +45,7 @@ sudo apt install --yes --no-install-recommends \
     xfonts-terminus
 
 # Download the server and extract
-curl -fO "https://downloads.apache.org/guacamole/${GUAC_VERSION}/source/guacamole-server-${GUAC_VERSION}.tar.gz"
+curl -fLO "https://downloads.apache.org/guacamole/${GUAC_VERSION}/source/guacamole-server-${GUAC_VERSION}.tar.gz"
 tar -xzf "guacamole-server-${GUAC_VERSION}.tar.gz"
 
 # Configure build
