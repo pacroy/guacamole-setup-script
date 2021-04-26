@@ -26,5 +26,5 @@ echo '<user-mapping>
              <param name="ignore-cert">true</param>
         </connection>
     </authorize>
-</user-mapping>' | sudo tee /etc/guacamole/user-mapping.xml
+</user-mapping>' | sudo tee /etc/guacamole/user-mapping.xml > /dev/null
 sudo systemctl restart tomcat
