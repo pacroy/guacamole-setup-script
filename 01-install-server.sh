@@ -58,6 +58,7 @@ sudo make install
 sudo ldconfig
 
 # Start service
+sudo systemctl reload guacd
 sudo systemctl start guacd
 systemctl status guacd
 sudo systemctl enable guacd
