@@ -120,5 +120,4 @@ sudo nginx -t
 sudo systemctl restart nginx
 
 # Clean up
-rm -f "apache-tomcat-${TOMCAT_VERSION}.tar.g"
 rm -f guacamole-${GUAC_VERSION}.war
