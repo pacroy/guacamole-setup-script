@@ -55,7 +55,7 @@ mysql-hostname: localhost
 mysql-port: 3306
 mysql-database: guacamole_db
 mysql-username: guacamole_user'"
-mysql-password: ${MYSQL_PASSWORD}" | sudo tee /etc/guacamole/guacamole.properties
+mysql-password: ${MYSQL_PASSWORD}" | sudo tee /etc/guacamole/guacamole.properties > /dev/null
 
 # Remove user-mapping file
 sudo rm -f /etc/guacamole/user-mapping.xml
