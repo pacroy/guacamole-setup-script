@@ -58,9 +58,10 @@ sudo make install
 sudo ldconfig
 
 # Start service
-sudo systemctl enable guacd
+sudo systemctl daemon-reload
 sudo systemctl start guacd
 systemctl status guacd --no-pager
+sudo systemctl enable guacd
 
 # Clean up
 cd ${OLDPWD}
