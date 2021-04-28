@@ -84,7 +84,7 @@ rm -f "apache-tomcat-${TOMCAT_VERSION}.tar.gz"
 
 # Download the client WAR and install
 curl -LO "https://downloads.apache.org/guacamole/${GUAC_VERSION}/binary/guacamole-${GUAC_VERSION}.war"
-sudo mv "guacamole-${GUAC_VERSION}.war" "/opt/tomcat/webapps/ROOT.war"
+sudo cp "guacamole-${GUAC_VERSION}.war" "/opt/tomcat/webapps/ROOT.war"
 sudo chown tomcat:tomcat "/opt/tomcat/webapps/ROOT.war"
 sudo systemctl restart tomcat
 
@@ -120,3 +120,4 @@ sudo systemctl restart nginx
 
 # Clean up
 rm -f "apache-tomcat-${TOMCAT_VERSION}.tar.g"
+rm -f guacamole-${GUAC_VERSION}.war
