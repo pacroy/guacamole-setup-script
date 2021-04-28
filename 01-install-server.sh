@@ -60,7 +60,7 @@ sudo ldconfig
 # Start service
 sudo systemctl enable guacd
 sudo systemctl start guacd
-systemctl status guacd
+systemctl status guacd --no-pager
 
 # Clean up
 cd ${OLDPWD}

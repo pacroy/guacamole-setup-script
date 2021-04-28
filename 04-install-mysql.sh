@@ -19,7 +19,7 @@ sudo apt-get update && sudo apt-get --yes upgrade
 
 # Install MySQL
 sudo apt install --yes mysql-server pwgen
-systemctl status mysql
+systemctl status mysql --no-pager
 sudo mysql --execute='select version()'
 
 # Configure MySQL

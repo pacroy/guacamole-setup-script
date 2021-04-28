@@ -74,7 +74,7 @@ Restart=always
 WantedBy=multi-user.target" | sudo tee /etc/systemd/system/tomcat.service > /dev/null
 sudo systemctl daemon-reload
 sudo systemctl start tomcat
-systemctl status tomcat.service
+systemctl status tomcat.service --no-pager
 sudo systemctl enable tomcat
 
 # Clean up
