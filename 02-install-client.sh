@@ -38,7 +38,7 @@ sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
 sudo adduser $USER tomcat
 curl -LO "https://downloads.apache.org/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz"
 sudo mkdir -p /opt/tomcat
-sudo tar xzvf "apache-tomcat-${TOMCAT_VERSION}.tar.gz" -C /opt/tomcat --strip-components=1
+sudo tar -xzf "apache-tomcat-${TOMCAT_VERSION}.tar.gz" -C /opt/tomcat --strip-components=1
 sudo chgrp -R tomcat /opt/tomcat
 cd /opt/tomcat
 sudo chmod -R g+r conf
