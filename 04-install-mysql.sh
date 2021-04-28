@@ -65,6 +65,6 @@ sudo systemctl restart tomcat
 
 # Clean up
 rm -rf "guacamole-auth-jdbc-${GUAC_VERSION}"
-rm "guacamole-auth-jdbc-${GUAC_VERSION}.tar.gz"
+rm -f "guacamole-auth-jdbc-${GUAC_VERSION}.tar.gz"
 rm -rf "mysql-connector-java-${CONNECTORJ_VERSION}"
-rm "mysql-connector-java-${CONNECTORJ_VERSION}.tar.gz"
+rm -f "mysql-connector-java-${CONNECTORJ_VERSION}.tar.gz"

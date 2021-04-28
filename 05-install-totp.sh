@@ -23,4 +23,4 @@ sudo systemctl restart tomcat
 
 # Clean up
 rm -rf "guacamole-auth-totp-${GUAC_VERSION}"
-rm "guacamole-auth-totp-${GUAC_VERSION}.tar.gz"
+rm -f "guacamole-auth-totp-${GUAC_VERSION}.tar.gz"
