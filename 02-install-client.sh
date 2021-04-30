@@ -87,7 +87,6 @@ curl -LO "https://downloads.apache.org/guacamole/${GUAC_VERSION}/binary/guacamol
 sudo cp "guacamole-${GUAC_VERSION}.war" "/opt/tomcat/webapps/ROOT.war"
 sudo chown tomcat:tomcat "/opt/tomcat/webapps/ROOT.war"
 sudo rm -rf /opt/tomcat/webapps/ROOT
-sudo systemctl restart tomcat
 
 # Configure certbot
 sudo certbot --nginx -d "${DOMAIN_NAME}" -m "${EMAIL}" --agree-tos -n
@@ -117,6 +116,8 @@ replace_with='proxy_pass http:\/\/localhost:8080\/;\
 sudo sed -i "s/${search_for}/${replace_with}/g" /etc/nginx/sites-enabled/default
 
 sudo nginx -t
+
+sudo systemctl restart tomcat
 sudo systemctl restart nginx
 
 # Clean up
