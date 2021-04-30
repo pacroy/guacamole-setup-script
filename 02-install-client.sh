@@ -35,7 +35,7 @@ TOMCAT_MAJOR_VERSION=$(echo ${TOMCAT_VERSION} | awk -F . '{print $1}')
 sudo apt-get install --yes default-jdk
 sudo groupadd tomcat
 sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
-sudo adduser $USER tomcat
+sudo usermod -a -G tomcat $USER
 curl -LO "https://downloads.apache.org/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz"
 sudo mkdir -p /opt/tomcat
 sudo tar -xzf "apache-tomcat-${TOMCAT_VERSION}.tar.gz" -C /opt/tomcat --strip-components=1
@@ -84,9 +84,8 @@ rm -f "apache-tomcat-${TOMCAT_VERSION}.tar.gz"
 
 # Download the client WAR and install
 curl -LO "https://downloads.apache.org/guacamole/${GUAC_VERSION}/binary/guacamole-${GUAC_VERSION}.war"
-sudo touch "/opt/tomcat/webapps/ROOT.war"
-sudo chown tomcat:tomcat "/opt/tomcat/webapps/ROOT.war"
 sudo cp "guacamole-${GUAC_VERSION}.war" "/opt/tomcat/webapps/ROOT.war"
+sudo chown tomcat:tomcat "/opt/tomcat/webapps/ROOT.war"
 sudo systemctl restart tomcat
 
 # Configure certbot
