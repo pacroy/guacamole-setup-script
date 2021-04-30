@@ -16,8 +16,8 @@ TOMCAT_VERSION="${TOMCAT_VERSION:-8.5.65}"
 DOMAIN_NAME="${DOMAIN_NAME:-${1}}"
 EMAIL="${EMAIL:-${2}}"
 
-if [ -z ${DOMAIN_NAME} ]; then >&2 echo "DOMAIN_NAME is required as an environment variable or as the 1st argument" && error=true; fi
-if [ -z ${EMAIL} ]; then >&2 echo "EMAIL is required as an environment variable or as the 2nd argument" && error=true; fi
+if [ -z "${DOMAIN_NAME}" ]; then >&2 echo "DOMAIN_NAME is required as an environment variable or as the 1st argument" && error=true; fi
+if [ -z "${EMAIL}" ]; then >&2 echo "EMAIL is required as an environment variable or as the 2nd argument" && error=true; fi
 if [ "$error" == "true" ]; then exit 90; fi
 
 # Update & upgrade system
@@ -31,11 +31,11 @@ sudo snap install core; sudo snap refresh core
 sudo snap install --classic certbot
 
 # Install Tomcat
-TOMCAT_MAJOR_VERSION=$(echo ${TOMCAT_VERSION} | awk -F . '{print $1}')
+TOMCAT_MAJOR_VERSION=$(echo "${TOMCAT_VERSION}" | awk -F . '{print $1}')
 sudo apt-get install --yes default-jdk
 sudo groupadd tomcat
 sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
-sudo usermod -a -G tomcat $USER
+sudo usermod -a -G tomcat "$USER"
 curl -LO "https://downloads.apache.org/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz"
 sudo mkdir -p /opt/tomcat
 sudo tar -xzf "apache-tomcat-${TOMCAT_VERSION}.tar.gz" -C /opt/tomcat --strip-components=1
@@ -121,4 +121,4 @@ sudo systemctl restart tomcat
 sudo systemctl restart nginx
 
 # Clean up
-rm -f guacamole-${GUAC_VERSION}.war
+rm -f "guacamole-${GUAC_VERSION}.war"

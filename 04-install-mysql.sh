@@ -26,7 +26,7 @@ sudo mysql --execute='select version()'
 # sudo mysql_secure_installation
 
 # Download and install JDBC extensions
-curl -fLO https://downloads.apache.org/guacamole/${GUAC_VERSION}/binary/guacamole-auth-jdbc-${GUAC_VERSION}.tar.gz
+curl -fLO "https://downloads.apache.org/guacamole/${GUAC_VERSION}/binary/guacamole-auth-jdbc-${GUAC_VERSION}.tar.gz"
 tar -xzf "guacamole-auth-jdbc-${GUAC_VERSION}.tar.gz"
 
 sudo mkdir -p /etc/guacamole/extensions
