@@ -22,7 +22,7 @@ sudo apt install --yes build-essential
 sudo apt install --yes libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin libossp-uuid-dev
 
 # Install optional dependencies
-sudo apt install --yes \	
+sudo apt install --yes \
     libavcodec-dev libavformat-dev libavutil-dev libswscale-dev \
     freerdp2-dev \
     libpango1.0-dev \
@@ -36,7 +36,7 @@ sudo apt install --yes \
     libwebp-dev
 
 # Install runtime dependencies
-sudo apt install --yes --no-install-recommends \	
+sudo apt install --yes --no-install-recommends \
     netcat-openbsd                \
     ca-certificates               \
     ghostscript                   \
@@ -58,11 +58,12 @@ sudo make install
 sudo ldconfig
 
 # Start service
+sudo systemctl daemon-reload
 sudo systemctl start guacd
-systemctl status guacd
+systemctl status guacd --no-pager
 sudo systemctl enable guacd
 
 # Clean up
-cd ${OLDPWD}
+cd -
 rm -rf "guacamole-server-${GUAC_VERSION}"
 rm -f "guacamole-server-${GUAC_VERSION}.tar.gz"

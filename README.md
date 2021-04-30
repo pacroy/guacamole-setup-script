@@ -15,16 +15,16 @@ Shell scripts for install Apache Guacamole on Ubuntu Server 18.04
 Run script as non-root, sudoer user.
 
 ```sh
-DOMAIN_NAME=<Your Server FQDN>
-EMAIL=<Your Email Address>
+export DOMAIN_NAME=<Your Server FQDN>
+export EMAIL=<Your Email Address>
 ./setup.sh
 ```
 
-Or you can execute scripts manually
+Or you can execute each script manually
 
 ```sh
-DOMAIN_NAME=<Your Server FQDN>
-EMAIL=<Your Email Address>
+export DOMAIN_NAME=<Your Server FQDN>
+export EMAIL=<Your Email Address>
 ./01-install-server.sh  # Install Guacamole server
 ./02-install-client.sh  # Install Guacamole client
 ./03-configure-user.sh  # Configure basic user in user-mapping.xml

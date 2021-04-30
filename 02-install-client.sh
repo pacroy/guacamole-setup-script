@@ -16,8 +16,8 @@ TOMCAT_VERSION="${TOMCAT_VERSION:-8.5.65}"
 DOMAIN_NAME="${DOMAIN_NAME:-${1}}"
 EMAIL="${EMAIL:-${2}}"
 
-if [ -z ${DOMAIN_NAME} ]; then >&2 echo "DOMAIN_NAME is required as an environment variable or as the 1st argument" && error=true; fi
-if [ -z ${EMAIL} ]; then >&2 echo "EMAIL is required as an environment variable or as the 2nd argument" && error=true; fi
+if [ -z "${DOMAIN_NAME}" ]; then >&2 echo "DOMAIN_NAME is required as an environment variable or as the 1st argument" && error=true; fi
+if [ -z "${EMAIL}" ]; then >&2 echo "EMAIL is required as an environment variable or as the 2nd argument" && error=true; fi
 if [ "$error" == "true" ]; then exit 90; fi
 
 # Update & upgrade system
@@ -31,14 +31,14 @@ sudo snap install core; sudo snap refresh core
 sudo snap install --classic certbot
 
 # Install Tomcat
-TOMCAT_MAJOR_VERSION=$(echo ${TOMCAT_VERSION} | awk -F . '{print $1}')
+TOMCAT_MAJOR_VERSION=$(echo "${TOMCAT_VERSION}" | awk -F . '{print $1}')
 sudo apt-get install --yes default-jdk
 sudo groupadd tomcat
 sudo useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
-sudo adduser $USER tomcat
+sudo usermod -a -G tomcat "$USER"
 curl -LO "https://downloads.apache.org/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz"
 sudo mkdir -p /opt/tomcat
-sudo tar xzvf "apache-tomcat-${TOMCAT_VERSION}.tar.gz" -C /opt/tomcat --strip-components=1
+sudo tar -xzf "apache-tomcat-${TOMCAT_VERSION}.tar.gz" -C /opt/tomcat --strip-components=1
 sudo chgrp -R tomcat /opt/tomcat
 cd /opt/tomcat
 sudo chmod -R g+r conf
@@ -46,7 +46,8 @@ sudo chmod g+x conf
 sudo chown -R tomcat webapps/ work/ temp/ logs/
 
 # Configure Tomcat service
-JAVA_HOME=$(update-java-alternatives -l | awk '{print $3}')
+JAVA_ALT_TEXT="$(update-java-alternatives -l || true)"
+JAVA_HOME="$(echo "${JAVA_ALT_TEXT}" | awk '{print $3}')"
 echo "[Unit]
 Description=Apache Tomcat Web Application Container
 After=network.target
@@ -74,18 +75,18 @@ Restart=always
 WantedBy=multi-user.target" | sudo tee /etc/systemd/system/tomcat.service > /dev/null
 sudo systemctl daemon-reload
 sudo systemctl start tomcat
-systemctl status tomcat.service
+systemctl status tomcat.service --no-pager
 sudo systemctl enable tomcat
 
 # Clean up
-cd ${OLDPWD}
+cd -
 rm -f "apache-tomcat-${TOMCAT_VERSION}.tar.gz"
 
 # Download the client WAR and install
-curl -LO "https://apache.org/dyn/closer.cgi?action=download&filename=guacamole/${GUAC_VERSION}/binary/guacamole-${GUAC_VERSION}.war"
-sudo mv "guacamole-${GUAC_VERSION}.war" "/opt/tomcat/webapps/ROOT.war"
+curl -LO "https://downloads.apache.org/guacamole/${GUAC_VERSION}/binary/guacamole-${GUAC_VERSION}.war"
+sudo cp "guacamole-${GUAC_VERSION}.war" "/opt/tomcat/webapps/ROOT.war"
 sudo chown tomcat:tomcat "/opt/tomcat/webapps/ROOT.war"
-sudo systemctl restart tomcat
+sudo rm -rf /opt/tomcat/webapps/ROOT
 
 # Configure certbot
 sudo certbot --nginx -d "${DOMAIN_NAME}" -m "${EMAIL}" --agree-tos -n
@@ -115,7 +116,9 @@ replace_with='proxy_pass http:\/\/localhost:8080\/;\
 sudo sed -i "s/${search_for}/${replace_with}/g" /etc/nginx/sites-enabled/default
 
 sudo nginx -t
+
+sudo systemctl restart tomcat
 sudo systemctl restart nginx
 
 # Clean up
-rm -f "apache-tomcat-${TOMCAT_VERSION}.tar.g"
+rm -f "guacamole-${GUAC_VERSION}.war"

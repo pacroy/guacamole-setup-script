@@ -19,14 +19,14 @@ sudo apt-get update && sudo apt-get --yes upgrade
 
 # Install MySQL
 sudo apt install --yes mysql-server pwgen
-systemctl status mysql
+systemctl status mysql --no-pager
 sudo mysql --execute='select version()'
 
 # Configure MySQL
 # sudo mysql_secure_installation
 
 # Download and install JDBC extensions
-curl -fLO https://downloads.apache.org/guacamole/${GUAC_VERSION}/binary/guacamole-auth-jdbc-${GUAC_VERSION}.tar.gz
+curl -fLO "https://downloads.apache.org/guacamole/${GUAC_VERSION}/binary/guacamole-auth-jdbc-${GUAC_VERSION}.tar.gz"
 tar -xzf "guacamole-auth-jdbc-${GUAC_VERSION}.tar.gz"
 
 sudo mkdir -p /etc/guacamole/extensions
@@ -55,7 +55,7 @@ mysql-hostname: localhost
 mysql-port: 3306
 mysql-database: guacamole_db
 mysql-username: guacamole_user'"
-mysql-password: ${MYSQL_PASSWORD}" | sudo tee /etc/guacamole/guacamole.properties
+mysql-password: ${MYSQL_PASSWORD}" | sudo tee /etc/guacamole/guacamole.properties > /dev/null
 
 # Remove user-mapping file
 sudo rm -f /etc/guacamole/user-mapping.xml
@@ -65,6 +65,6 @@ sudo systemctl restart tomcat
 
 # Clean up
 rm -rf "guacamole-auth-jdbc-${GUAC_VERSION}"
-rm "guacamole-auth-jdbc-${GUAC_VERSION}.tar.gz"
+rm -f "guacamole-auth-jdbc-${GUAC_VERSION}.tar.gz"
 rm -rf "mysql-connector-java-${CONNECTORJ_VERSION}"
-rm "mysql-connector-java-${CONNECTORJ_VERSION}.tar.gz"
+rm -f "mysql-connector-java-${CONNECTORJ_VERSION}.tar.gz"
