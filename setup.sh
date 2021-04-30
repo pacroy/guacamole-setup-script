@@ -13,7 +13,7 @@ export DOMAIN_NAME="${DOMAIN_NAME:-${1}}"
 export EMAIL="${EMAIL:-${2}}"
 
 if [ -z "${DOMAIN_NAME}" ]; then >&2 echo "DOMAIN_NAME is required as an environment variable or as the 1st argument" && error=true; fi
-if [ -z "${EMAIL}"" ]; then >&2 echo "EMAIL is required as an environment variable or as the 1st argument" && error=true; fi
+if [ -z "${EMAIL}" ]; then >&2 echo "EMAIL is required as an environment variable or as the 1st argument" && error=true; fi
 if [ "$error" == "true" ]; then exit 90; fi
 
 ./01-install-server.sh
