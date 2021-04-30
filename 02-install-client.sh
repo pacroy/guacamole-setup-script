@@ -86,6 +86,7 @@ rm -f "apache-tomcat-${TOMCAT_VERSION}.tar.gz"
 curl -LO "https://downloads.apache.org/guacamole/${GUAC_VERSION}/binary/guacamole-${GUAC_VERSION}.war"
 sudo cp "guacamole-${GUAC_VERSION}.war" "/opt/tomcat/webapps/ROOT.war"
 sudo chown tomcat:tomcat "/opt/tomcat/webapps/ROOT.war"
+sudo rm -rf /opt/tomcat/webapps/ROOT
 sudo systemctl restart tomcat
 
 # Configure certbot
