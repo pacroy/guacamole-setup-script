@@ -64,6 +64,6 @@ systemctl status guacd --no-pager
 sudo systemctl enable guacd
 
 # Clean up
-cd ${OLDPWD}
+cd -
 rm -rf "guacamole-server-${GUAC_VERSION}"
 rm -f "guacamole-server-${GUAC_VERSION}.tar.gz"

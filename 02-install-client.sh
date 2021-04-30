@@ -79,7 +79,7 @@ systemctl status tomcat.service --no-pager
 sudo systemctl enable tomcat
 
 # Clean up
-cd ${OLDPWD}
+cd -
 rm -f "apache-tomcat-${TOMCAT_VERSION}.tar.gz"
 
 # Download the client WAR and install
